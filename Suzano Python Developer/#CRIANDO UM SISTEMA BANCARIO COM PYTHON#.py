@@ -25,6 +25,10 @@ cont=0
 '''Loop infinito, aguardando a  opção "0" para parar.'''
 while True:
     operação=int(input(menu)) #Escolha da opção pelo usuario
+    if operação!=0 or 1 or 2 or 3: #Validação do menu
+        print('''##  OPÇÃO INVALIDA ##
+ESCOLHA UMA OPÇÃO NO MENU''')
+        sleep(2.0)
     if operação==0: # 1º bloco - opção sair, encerrando o loop infinito.
         sleep(1)
         print("Opção Sair")       
