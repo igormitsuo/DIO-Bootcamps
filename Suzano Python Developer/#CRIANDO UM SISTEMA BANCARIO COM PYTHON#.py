@@ -58,6 +58,9 @@ ESCOLHA UMA OPÇÃO NO MENU''')
                 break            
             print("Processando...")
             sleep(1.5)
+        else:
+            print("### OPERAÇÃO INVALIDA ###")
+            sleep(3.0)
     if cont<=2 and operação==2: #3º bloco - opção saque - usuario informa o valor de saque,que é salvo em uma variavel e exibido no extrato
         print("Opção Saque\n")
         print(f'*** Seu saldo é de R$ {saldo :.2f}****')
@@ -92,6 +95,7 @@ ESCOLHA UMA OPÇÃO NO MENU''')
                 print(f"Seu saldo atual é de R$ {saldo :.2f}")
             if saque<0:
                 print("### OPERAÇÃO INVALIDA ###")
+                sleep(3.0)
             opção=str(input('''Deseja realizar outra operação? [s]\[n]\n''')).upper()
             if opção=="N":
                 sleep(1.5) 
