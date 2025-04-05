@@ -25,7 +25,7 @@ cont=0
 '''Loop infinito, aguardando a  opção "0" para parar.'''
 while True:
     operação=int(input(menu)) #Escolha da opção pelo usuario
-    if operação!=0 or 1 or 2 or 3: #Validação do menu
+    if operação not in [0,1,2,3]:     #Validação do menu#
         print('''##  OPÇÃO INVALIDA ##
 ESCOLHA UMA OPÇÃO NO MENU''')
         sleep(2.0)
@@ -66,7 +66,7 @@ ESCOLHA UMA OPÇÃO NO MENU''')
         saque=float(input("Digite o valor de saque desejado\n"))
         print("Processando.....")
         sleep(1.5)
-        if  saque<= 500 and saldo>-1 and saldo>=saque:
+        if  saque<= 500 and saldo>=0 and saldo>=saque and saque>0:
             saldo-=saque
             extrato_saque.append(saque)
             cont+=1
@@ -90,6 +90,8 @@ ESCOLHA UMA OPÇÃO NO MENU''')
             if saldo<0 or saldo<saque:
                 print("### SALDO INSUFICIENTE ### ")        
                 print(f"Seu saldo atual é de R$ {saldo :.2f}")
+            if saque<0:
+                print("### OPERAÇÃO INVALIDA ###")
             opção=str(input('''Deseja realizar outra operação? [s]\[n]\n''')).upper()
             if opção=="N":
                 sleep(1.5) 
