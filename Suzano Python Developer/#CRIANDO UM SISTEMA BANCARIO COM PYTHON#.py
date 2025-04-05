@@ -49,7 +49,9 @@ ESCOLHA UMA OPÇÃO NO MENU''')
             sleep(1.5)
             print(f"Seu saldo atual é de R$ {saldo :.2f}")
             sleep(1.5)
-            opção=str(input('''Deseja realizar outra operação? [s]\[n]\n''')).upper() #estrutura de decisão - usuario decide se deseja realizar outra operação.
+            opção=str(input('''Deseja realizar outra operação? [s]\[n]\n''')).upper() #estrutura de decisão - usuario decide se deseja realizar outra operação.   
+            if opção not in ["S","N"]:           
+                print("### OPÇÃO INVALIDA - RETORNANDO AO MENU PRINCIPAL ###")          
             if opção=="N":
                 sleep(1.5) 
                 print('''Obrigado por utilizar nosso banco 
@@ -69,7 +71,7 @@ ESCOLHA UMA OPÇÃO NO MENU''')
         saque=float(input("Digite o valor de saque desejado\n"))
         print("Processando.....")
         sleep(1.5)
-        if  saque<= 500 and saldo>=0 and saldo>=saque and saque>0:
+        if  saque<= 500 and saldo>=0 and saldo>=saque and saque>0 :
             saldo-=saque
             extrato_saque.append(saque)
             cont+=1
@@ -79,6 +81,8 @@ ESCOLHA UMA OPÇÃO NO MENU''')
             sleep(2)
             print(f"Seu saldo atual é de R$ {saldo :.2f}\n")
             opção=str(input('''Deseja realizar outra operação? [s]\[n]\n''')).upper()
+            if opção not in ["S","N"]:           
+                print("### OPÇÃO INVALIDA - RETORNANDO AO MENU PRINCIPAL ###") 
             if opção=="N":
                 sleep(1.5) 
                 print('''Obrigado por utilizar nosso banco 
@@ -90,13 +94,17 @@ ESCOLHA UMA OPÇÃO NO MENU''')
         else:            
             if saque>500:
                 print("### LIMITE DE SAQUE DIARIO EXCEDIDO ### ")
+                sleep(3.0)
             if saldo<0 or saldo<saque:
                 print("### SALDO INSUFICIENTE ### ")        
                 print(f"Seu saldo atual é de R$ {saldo :.2f}")
+                sleep(3.0)
             if saque<0:
                 print("### OPERAÇÃO INVALIDA ###")
                 sleep(3.0)
             opção=str(input('''Deseja realizar outra operação? [s]\[n]\n''')).upper()
+            if opção not in ["S","N"]:           
+                print("### OPÇÃO INVALIDA - RETORNANDO AO MENU PRINCIPAL ###") 
             if opção=="N":
                 sleep(1.5) 
                 print('''Obrigado por utilizar nosso banco 
@@ -113,6 +121,8 @@ ESCOLHA UMA OPÇÃO NO MENU''')
             print("*"*40)      
             print(f"Seu saldo atual é de ........R$ {saldo :.2f}")
             opção=str(input('''Deseja realizar outra operação? [s]\[n]\n''')).upper()
+            if opção not in ["S","N"]:           
+                print("### OPÇÃO INVALIDA - RETORNANDO AO MENU PRINCIPAL ###") 
             if opção=="N":
                 sleep(1.5) 
                 print('''Obrigado por utilizar nosso banco 
