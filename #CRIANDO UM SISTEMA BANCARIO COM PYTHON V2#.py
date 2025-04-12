@@ -20,6 +20,8 @@ import pytz
 saldo=0.0
 deposito=0.0
 saque=0.0
+cont_deposito=0
+cont_saque=0
 data_hora_deposito=[]
 extrato_deposito=[]
 data_hora_saque=[]
@@ -37,7 +39,7 @@ while True:
     operação=int(input(menu)) #Escolha da opção pelo usuario
     if operação not in [0,1,2,3]:     #Validação do menu#
         print('''##  OPÇÃO INVALIDA ##
-ESCOLHA UMA OPÇÃO NO MENU''')
+                ESCOLHA UMA OPÇÃO NO MENU''')
         sleep(2.0)
     if operação==0: # 1º bloco - opção sair, encerrando o loop infinito.
         sleep(1)
@@ -76,7 +78,7 @@ ESCOLHA UMA OPÇÃO NO MENU''')
         else:
             print("### OPERAÇÃO INVALIDA ###")
             sleep(3.0)
-    if cont_saque_diario<=2 and operação==2: #3º bloco - opção saque - usuario informa o valor de saque,que é salvo em uma variavel e exibido no extrato
+    if  operação==2: #3º bloco - opção saque - usuario informa o valor de saque,que é salvo em uma variavel e exibido no extrato
         print("Opção Saque\n")
         print(f'*** Seu saldo é de R$ {saldo :.2f}****')
         print("Limite de saque por operação ***R$ 500,00***")
@@ -84,7 +86,12 @@ ESCOLHA UMA OPÇÃO NO MENU''')
         saque=float(input("Digite o valor de saque desejado\n"))
         print("Processando.....")
         sleep(1.5)
-        if  saque<= 500 and saldo>=0 and saldo>=saque and saque>0 :
+        if cont_saque_diario ==2:
+            print("### NUMERO DE SAQUES DIARIOS EXCEDIDO ###")
+            print("## OPERAÇÃO FINALIZADA ##")
+            sleep(1)
+            break                
+        if  saque<= 500 and saldo>=0 and saldo>=saque and saque>0:
             saldo-=saque
             data_hora=datetime.now()
             data_hora_saque.append(data_hora.strftime('%d/%m/%y %H:%M:%S'))
@@ -96,7 +103,6 @@ ESCOLHA UMA OPÇÃO NO MENU''')
             print(f"### RETIRE O VALOR SOLICITADO ### \n")
             sleep(2)
             print(f"Seu saldo atual é de R$ {saldo :.2f}\n")
-            print(cont_saque_diario)
             opção=str(input('''Deseja realizar outra operação? [s]\[n]\n''')).upper()
             if opção not in ["S","N"]:           
                 print("### OPÇÃO INVALIDA - RETORNANDO AO MENU PRINCIPAL ###") 
@@ -107,8 +113,9 @@ ESCOLHA UMA OPÇÃO NO MENU''')
                 sleep (1.5)
                 break
             print("Processando...")
-            sleep(1.5)
-        else:            
+            sleep(1.5)  
+            
+        else:    
             if saque>500:
                 print("### LIMITE DE SAQUE DIARIO EXCEDIDO ### ")
                 sleep(3.0)
@@ -130,15 +137,28 @@ ESCOLHA UMA OPÇÃO NO MENU''')
                 break
             print("Processando...")
             sleep(1.5)
-    if operação==3: #4º bloco - opção extrato - exibe o historico de movimentações realizadas pelo usuario.
-            
+                   
+    if operação==3: #4º bloco - opção extrato - exibe o historico de movimentações realizadas pelo usuario.  
+            print("*"*40)
+            texto="## Extrato Bancario ##"
+            print(f'{texto:^40}')
+            print("")             
             for numero in extrato_deposito:
+               print(f'Data\Hora               {data_hora_deposito[cont_deposito]}')
+               cont_deposito+=1
                print(f'Deposito.....................R$ {numero:.2f}')
+            print("*"*40)
+            print("")
             for numero in extrato_saque:
+                print(f'Data\Hora              {data_hora_saque[cont_saque]}')
+                cont_saque+=1
                 print(f'saque........................R$ {numero:.2f}') 
-            print("*"*40)      
+            print("*"*40)
+            print("")      
             print(f"Seu saldo atual é de ........R$ {saldo :.2f}")
             cont_operação_max+=1
+            print("*"*40)
+            print("")
             opção=str(input('''Deseja realizar outra operação? [s]\[n]\n''')).upper()
             if opção not in ["S","N"]:           
                 print("### OPÇÃO INVALIDA - RETORNANDO AO MENU PRINCIPAL ###") 
@@ -150,12 +170,7 @@ ESCOLHA UMA OPÇÃO NO MENU''')
                 break
             print("Processando...")
             sleep(1.5)
-    if cont_saque_diario>2:
-        print("### NUMERO DE SAQUES DIARIOS EXCEDIDO ###")
-        print("## OPERAÇÃO FINALIZADA ##")
-        print(cont_saque_diario)
-        sleep(1)
-        
+    
     
         
     
