@@ -1,4 +1,4 @@
-#CRIANDO UM SISTEMA BANCARIO COM FUNÇÕES EM PYTHON V2#
+
 
 from time import sleep
 from datetime import datetime
@@ -12,11 +12,8 @@ data_hora_deposito=[]
 extrato_deposito=[]
 data_hora_saque=[]
 extrato_saque=[]
-contas_banco=[]
-conta_usuario=[]
 cont_saque_diario=0
 cont_operação_max=0
-num_conta=0
 
     
 def menu():
@@ -28,14 +25,11 @@ def menu():
 [1] DEPOSITOS
 [2] SAQUES
 [3] EXTRATO DETALHADO
-[4] CRIAR CONTA
-[5] CADASTRAR USUARIO
-[6] CONSULTAR CONTA DE USUARIO
-       
+
 **************************************
 ''')
  valor=int(input("Entre com a opção \n"))
- if valor not in [0,1,2,3,4,5,6]:
+ if valor not in [0,1,2,3]:
     print("## OPÇÃO INVALIDA: DIGITE UM VALIDO##")
     sleep(2)
  return (valor)
@@ -49,7 +43,7 @@ def confirmar():
       return (opção)
       break 
 
-def f_deposito(): #Bloco 1 -Opção Deposito
+def f_deposito():
   while True:
     global saldo
     global data_hora
@@ -80,7 +74,7 @@ def f_deposito(): #Bloco 1 -Opção Deposito
       print("### RETORNANDO AO MENU PRINCIPAL ###")
       break
 
-def f_saque (): #Bloco 2 -opção saque - usuario informa o valor de saque,que é salvo em uma variavel e exibido no extrato
+def f_saque ():
   while True:
     global saque
     global cont_saque_diario
@@ -89,7 +83,7 @@ def f_saque (): #Bloco 2 -opção saque - usuario informa o valor de saque,que �
     global data_hora_saque
     global extrato_saque
     global cont_operação_max
-    print("Opção Saque\n") 
+    print("Opção Saque\n")#3º bloco - opção saque - usuario informa o valor de saque,que é salvo em uma variavel e exibido no extrato
     print(f'*** Seu saldo é de R$ {saldo :.2f}****')
     print("Limite de saque por operação ***R$ 500,00***")
     print("Limite de saque diario ***R$ 1500,00***\n")
@@ -137,7 +131,7 @@ def f_saque (): #Bloco 2 -opção saque - usuario informa o valor de saque,que �
       sleep(1.0)
       break
     
-def f_extrato(): #Bloco 3 -Opção Extrato Detalhado
+def f_extrato():
   while True:
     global saldo
     global deposito
@@ -177,101 +171,23 @@ def f_extrato(): #Bloco 3 -Opção Extrato Detalhado
       print("### RETORNANDO AO MENU PRINCIPAL ###")
       sleep(1)
       break
-    
-def cad_conta(): #Bloco 4 -Opção Criar conta
-  global num_conta
-  cadastro={}
-  agencia="0001" 
-  num_conta+=1
-  print("Processando.....")
-  sleep(1.0)
-  usuario=int(input("Digite o CPF DO USUARIO\n"))
-  cadastro={"usuario":usuario,"agencia":agencia,"num_cont":num_conta}
-  print("Processando.....")
-  sleep(1.0)
-  print("*"*40)
-  texto="## CONTA BANCARIA ##"
-  print(f'{texto:^40}')
-  print(f" Usuario CPF:  {usuario} \n Agencia:  {agencia} \n Conta Numero {num_conta} ")
-  texto="## CRIADA COM SUCESSO ##"
-  print(f'{texto:^40}')
-  sleep(2.0)
-  return cadastro         
 
-def cad_usuario():#Bloco 5 -Cadastrar Usuario
-  cadastro={}
-  end=[]
-  print("Processando.....")
-  sleep(1.0)
-  nome=str(input("Digite o nome do Usuario\n"))
-  cpf=int(input("Digite o CPF do usuario\n"))
-  data_nasc=str(input("Digite a data de nasciento\n"))
-  logradouro=str(input("Digite a Rua\n"))
-  bairro=str(input("Digite o Bairro\n"))
-  cidade=str(input("Digite a Cidade\n"))  
-  estado=str(input("Digite o Estado\n"))
-  sigla=str(input("Digite a Sigla\n"))
-  cadastro= {"CPF":cpf,"Nome":nome,"Data de Nascimento":data_nasc,"Logradouro":logradouro,"Bairro":bairro,"Cidade":cidade,"Estado":estado,"Sigla":sigla}
-  print("Processando.....")
-  sleep(1.0)
-  print("*"*40)
-  texto="## CADASTRO DE USUARIO ##"
-  print(f'{texto:^40}')
-  print(f" Usuario Nome:                {nome} ")
-  print(f" Usuario CPF:                 {cpf} ")
-  print(f" Usuario data de nascimento:  {data_nasc} ")
-  print(f" Usuario Logradouro:          {logradouro} ")
-  print(f" Usuario Bairro:              {bairro} ")
-  print(f" Usuario Cidade:              {cidade} \{sigla} ") 
-  texto="## CRIADA COM SUCESSO ##"
-  print(f'{texto:^40}') 
-  sleep(2.0)
-  return cadastro
 
-def consulta_conta(): #Bloco 6 -Consultar Conta de Usuario
- global contas_banco
- global conta
- cont=0
- print("Processando.....")
- sleep(1.0)
- valor_procurado =int(input("Digite o CPF pra consultar\n"))
- for cliente in contas_banco:
-  if cliente["usuario"]==valor_procurado:
-   print(f"Informações do usuário: {cliente}")  
-   cont+=1
-  sleep(3)
-  if cont<1: 
-   sleep
-   print("## CLIENTE NÃO ENCONTRADO ##")
-   print("## REALIZE O CADASTRO DO CLIENTE ##") 
-   sleep(2)
+
 
 while True:
- operação= menu() #Bloco 0 -Opção Sair
+ operação= menu()
  if operação==0:
    sleep(1)
    print("Opção Sair")       
    sleep(2) 
    print('''Obrigado por utilizar nosso banco Volte sempre.''')
    break
- elif operação==1:#Bloco 1 -Opção Deposito
+ elif operação==1:
    f_deposito()
- elif operação==2:#Bloco 2 -opção saque - usuario informa o valor de saque,que é salvo em uma variavel e exibido no extrato
+ elif operação==2:
    f_saque()
- elif operação==3: #Bloco 3 -Opção Extrato Detalhado
+ elif operação==3:
    f_extrato()
- elif operação==4: #Bloco 4 -Opção Criar conta
-   conta=cad_conta()
-   contas_banco.append(conta.copy())
- elif operação==5: #Bloco 5 -Cadastrar Usuario  
-   conta_user=cad_usuario()
-   conta_usuario.append(conta_user.copy())
- elif operação==6: #Bloco 6 -Consultar Conta de Usuario
-   contas_banco=contas_banco.copy()
-   consulta_conta()
-
-    
-    
-        
-    
+ 
     
