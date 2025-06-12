@@ -247,8 +247,8 @@ def consulta_conta(): #Bloco 6 -Consultar Conta de Usuario
    sleep(2)
 
 while True:
- operação= menu() #Bloco 0 -Opção Sair
- if operação==0:
+ operação= menu() 
+ if operação==0: #Bloco 0 -Opção Sair
    sleep(1)
    print("Opção Sair")       
    sleep(2) 
